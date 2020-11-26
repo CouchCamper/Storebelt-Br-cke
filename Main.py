@@ -11,34 +11,37 @@ a = qY / pow(qX, 2)
 d = 1624 / 67
 
 # Gesamtlänge der senkrechten Tragseile
-g = 0
+l = 0
 
 for i in range(1, 34):
     x = qX - (i * d)
     y = a * pow(x, 2)
     #print("Punkt " + str(i) + " (" + str(x) + " | " + str(y) + ")")
-    g = g + (4 * y)
+    l += 4 * y
 
 print("\nFunktionsgleichung: f(x) = " + str(a) + " * x^2")
-print("\nDie Gesamtlänge der senkrechten Tragseile beträgt " + str(g) + " Meter.\n")
+print("\nDie Gesamtlänge der senkrechten Tragseile beträgt " + str(l) + " Meter.\n")
 
+
+# Anzahl der Steigungsdreicke; je mehr, desto genauer die Länge des Seils
+k = 10000000
 
 # Steigungsdreieck; je kleiner deltaX, desto genauer die Länge des Seils
-deltaX = qX / 2
+deltaX = qX / k
 deltaY = 0
-
-preY = qY
+dY = 0
 
 gesC = 0
 
-for j in range(1, qX // 2):
-    x = qX - j
+for j in range(1, k+1):
+    print(str(j))
+    x = qX - (j * deltaX)
     y = a * pow(x, 2)
     print("Punkt " + str(j) + " (" + str(x) + " | " + str(y) + ")")
-    deltaY = preY - y
+    deltaY = qY - y - dY
+    dY += deltaY
+    print(str(deltaX) + " | " + str(deltaY))
     c = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
-    gesC += c
-    print(str(c))
+    gesC += 4*c
 
-print("\nDie Gesamtlänge des großen parabelförmigen Tragseils beträgt " + str(gesC) + " Meter.")
-print(str(2 * sqrt(pow(qX, 2) + pow(qY, 2))))
+print("\nDie Gesamtlänge der zwei großen parabelförmigen Tragseile beträgt " + str(gesC) + " Meter.")
