@@ -24,7 +24,7 @@ print("\nDie Gesamtlänge der senkrechten Tragseile beträgt " + str(l) + " Mete
 
 
 # Anzahl der Steigungsdreicke; je mehr, desto genauer die Länge des Seils
-k = 10000000
+k = 100000
 
 # Steigungsdreieck; je kleiner deltaX, desto genauer die Länge des Seils
 deltaX = qX / k
@@ -34,13 +34,13 @@ dY = 0
 gesC = 0
 
 for j in range(1, k+1):
-    print(str(j))
+    #print(str(j))
     x = qX - (j * deltaX)
     y = a * pow(x, 2)
-    print("Punkt " + str(j) + " (" + str(x) + " | " + str(y) + ")")
+    #print("Punkt " + str(j) + " (" + str(x) + " | " + str(y) + ")")
     deltaY = qY - y - dY
     dY += deltaY
-    print(str(deltaX) + " | " + str(deltaY))
+    #print(str(deltaX) + " | " + str(deltaY))
     c = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
     gesC += 4*c
 
